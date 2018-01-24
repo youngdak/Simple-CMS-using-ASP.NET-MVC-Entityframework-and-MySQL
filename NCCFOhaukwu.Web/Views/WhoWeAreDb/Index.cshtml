@@ -1,0 +1,55 @@
+﻿@model IEnumerable<DAL.WhoWeAre>
+
+@{
+    ViewBag.Title = "Who We Are";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+<h2>WhoWeAre</h2>
+
+<p>
+    @Html.ActionLink("Add New WhoWeAre", "Create", null, new {@class = "btn btn-primary"})
+</p>
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Whoweare)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OurHistory)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OurBeliefs)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OurMission)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        var whoweare = (item.Whoweare.Length >= 50) ? item.Whoweare.Substring(0, 50) : item.Whoweare;
+        var ourhistory = (item.OurHistory.Length >= 50) ? item.OurHistory.Substring(0, 50) : item.OurHistory;
+        var ourbeliefs = (item.OurBeliefs.Length >= 50) ? item.OurBeliefs.Substring(0, 50) : item.OurBeliefs;
+        var ourmission = (item.OurMission.Length >= 50) ? item.OurMission.Substring(0, 50) : item.OurMission;
+        <tr>
+            <td>
+                @Html.Raw(whoweare)
+            </td>
+            <td>
+                @Html.Raw(ourhistory)
+            </td>
+            <td>
+                @Html.Raw(ourbeliefs)
+            </td>
+            <td>
+                @Html.Raw(ourmission)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
+                @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+            </td>
+        </tr>
+    }
+
+</table>

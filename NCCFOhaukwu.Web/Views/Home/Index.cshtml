@@ -1,0 +1,220 @@
+﻿@model NCCFOhaukwu.Web.Models.Home
+@using System.Text.RegularExpressions
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Home";
+    var i = 1;
+}
+
+<div id="wowslider-container1">
+    <div class="ws_images">
+        <ul>
+            @foreach (var carousel in Model.Carousels)
+            {
+                if (carousel.Img != null)
+                {
+                    <li>
+                        <img src="~/Images/CarouselImg/@carousel.Id" class="" alt="@carousel.Title" title="@carousel.Title"/>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+    <div class="ws_bullets">
+        <div>
+            @foreach (var carousel in Model.Carousels)
+            {
+                if (carousel.Img != null)
+                {
+                    <a href="#" title="@carousel.Title">
+                        <span>i</span></a>
+                    i++;
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<div id="whoweare" class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4">
+                <hr/>
+            </div>
+            <div class="col-xs-4">
+                <h2>New Here?</h2>
+            </div>
+            <div class="col-xs-4">
+                <hr/>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-3">
+                <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+                <h4>Service Times & Locations</h4>
+                <p>Sunday<br/>
+                    <strong>Ezzangbo:</strong> 3:00pm &#64; Family house.<br/>
+                    <strong>Ngbo:</strong> 4:00pm &#64; Corper's Lodge.<br/>
+                    <strong>Effium:</strong> 4:00pm &#64; Central Pri Sch.</p>
+                <a href="/new-here/#whattoexpect" class="btn btn-mod">What to Expect</a>
+            </div>
+            <div class="col-sm-3">
+                <i class="fa fa-book fa-3x"></i>
+                <h4>What We Believe</h4>
+                <p>Find out what is behind what we do and our core values.</p>
+                <a href="/who-we-are/#ourbeliefs" class="btn btn-mod">Our Beliefs</a>
+            </div>
+            <div class="col-sm-3">
+                <i class="fa fa-user fa-3x"></i>
+                <i class="fa fa-user fa-2x"></i>
+                <h4>Jesus Corpers</h4>
+                <p>Meet God's servants currently on the field putting in all their best to take the work of God to the next level.</p>
+                <a href="@Url.Action("JesusCorpers", "WhoWeAre")" class="btn btn-mod">Jesus Corpers</a>
+            </div>
+            <div class="col-sm-3">
+                <span class="glyphicon glyphicon-star center" aria-hidden="true"></span>
+                <h4>Our Generals</h4>
+                <p>Meet God's servants who have put in their all to achieving our beliefs.</p>
+                <a href="@Url.Action("OurGenerals", "WhoWeAre")" class="btn btn-mod">Our Generals</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="sermonandarticles" class="container-fluid">
+    <div class="container">
+        <div class="row">
+                <div id="sermon" class="col-sm-4">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span>Sermon for the day</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="container-fluid">
+                            @if (Model.Sermon != null)
+                            {
+                                <h2>@Model.Sermon.Title</h2>
+                                <h4>@Model.Sermon.Scriptures</h4>
+                                @*<a href="@Url.Action("Sermon", "Sermon", new { id = @Model.Sermon.Id, title = Regex.Replace(@Model.Sermon.Title, "[^a-zA-Z0-9 ]", "").Replace(" ", "-").ToLower() })" class="btn btn-mod">Read More</a>*@
+                            }
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div id="article" class="col-sm-7 col-md-offset-1">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span>Articles</span> | <a href="@Url.Action("Articles","Article")">More Articles</a>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        @foreach (var article in Model.Articles)
+                        {
+                            <div class="col-sm-4">
+                                <h4>@article.Title</h4>
+                        @{
+                            var articles = Regex.Replace(article.Article, "<.*?>", string.Empty);
+                            articles = (articles.Length >= 75) ? articles.Substring(0, 75) : articles;
+                        }
+                                <p>@articles ...</p>
+                                <a href="@Url.Action("Article", "Article", new { id = article.Id, title = Regex.Replace(article.Title, "[^a-zA-Z0-9 ]", "").Replace(" ", "-").ToLower() })" class="btn btn-mod">Read More</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+<div id="news" class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4">
+                <hr/>
+            </div>
+            <div class="col-xs-4">
+                <h2>News</h2>
+            </div>
+            <div class="col-xs-4">
+                <hr/>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="col-xs-12">
+                <a class="morenewsevents" href="@Url.Action("News", "News")">More Stories</a>
+            </div>
+        </div>
+
+        <div class="container">
+            @foreach (var signlenews in Model.News)
+            {
+                <div class="col-sm-3">
+                    <a href="@Url.Action("SingleNews", "News", new { id = signlenews.Id, title = Regex.Replace(signlenews.Title, "[^a-zA-Z0-9 ]", "").Replace(" ", "-").ToLower() })">
+                        <h2>@signlenews.Title</h2>
+                        @{
+                            var thenews = Regex.Replace(signlenews.TheNews, "<.*?>", string.Empty);
+                            thenews = (thenews.Length >= 100) ? thenews.Substring(0, 100) : thenews;
+                        }
+                        <span>@thenews ...</span>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+<div id="events" class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4">
+                <hr/>
+            </div>
+            <div class="col-xs-4">
+                <h2>Events</h2>
+            </div>
+            <div class="col-xs-4">
+                <hr/>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="col-xs-12">
+                <a class="morenewsevents" href="@Url.Action("Index", "Events")">Fellowship Calendar</a>
+            </div>
+        </div>
+
+        <div class="row">
+            @foreach (var singleEvent in Model.Events)
+            {
+                <div class="col-sm-3">
+                    <div>
+                        <div class="">
+                            <div class="panel">
+                                <div class="panel-heading">@singleEvent.StartDay</div>
+                                <div class="panel-heading">@singleEvent.StartMonth</div>
+                            </div>
+                            <a href="@Url.Action("SignleEvent", "Events", new { title = Regex.Replace(singleEvent.title, "[^a-zA-Z0-9 ]", "").Replace(" ", "-").ToLower(), start = singleEvent.start.ToString("d").Replace("/", "-") })">
+                                @singleEvent.title
+                            </a><br/>
+                            @{
+                                var startTime = (singleEvent.StartTime.Trim() == "am" || singleEvent.StartTime.Trim() == "pm") ? "" : singleEvent.StartTime;
+                                var endTime = (singleEvent.EndTime.Trim() == "am" || singleEvent.EndTime.Trim() == "pm") ? "" : singleEvent.EndTime.Insert(0, " - ");
+                            }
+                            <span>@startTime @endTime</span>
+                            <span>&#64 @singleEvent.Venue</span><br/>
+                            <a href="@Url.Action("SignleEvent", "Events", new { title = Regex.Replace(singleEvent.title, "[^a-zA-Z0-9 ]", "").Replace(" ", "-").ToLower(), start = singleEvent.start.ToString("dd/MM/yyyy").Replace("/", "-") })" class="btn btn-mod">Learn more</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

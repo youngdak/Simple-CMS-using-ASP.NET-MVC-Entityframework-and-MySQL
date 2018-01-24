@@ -1,0 +1,63 @@
+﻿@model NCCFOhaukwu.Web.Models.NewHereModel
+
+@{
+    ViewBag.Title = "Edit NewHere";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+
+<h2>Edit NewHere</h2>
+
+<div class="col-md-8">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NewToNccf, new {@class = "control-label"})
+                <div>
+                    @Html.TextAreaFor(model => model.NewToNccf, new { htmlAttributes = new { @class = "input-lg" } })
+                    @Html.ValidationMessageFor(model => model.NewToNccf, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.WhatToExpect, new {@class = "control-label"})
+                <div>
+                    @Html.TextAreaFor(model => model.WhatToExpect, new { htmlAttributes = new { @class = "input-lg" } })
+                    @Html.ValidationMessageFor(model => model.WhatToExpect, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FamilySong, new { @class = "control-label" })
+                <div>
+                    @Html.TextAreaFor(model => model.FamilySong, new { htmlAttributes = new { @class = "input-lg" } })
+                    @Html.ValidationMessageFor(model => model.FamilySong, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ServiceTimesandLocations, new {@class = "control-label"})
+                <div>
+                    @Html.TextAreaFor(model => model.ServiceTimesandLocations, new { htmlAttributes = new { @class = "input-lg" } })
+                    @Html.ValidationMessageFor(model => model.ServiceTimesandLocations, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="">
+                    <input type="submit" value="Update NewHere" class="btn btn-mod"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-arrow-left"></i> Back to NewHere</a>
+            </div>
+        </div>
+    }
+</div>

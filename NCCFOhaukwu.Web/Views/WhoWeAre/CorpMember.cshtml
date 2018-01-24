@@ -1,0 +1,93 @@
+﻿@model DAL.CorpMember
+@{
+    ViewBag.Title = ViewBag.General == "General" ? "General" : "Jesus Corper";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+@if (ViewBag.General == "General")
+{
+    <h2>General's Details</h2><br /><br />
+}
+else
+{
+    <h2>Jesus Corper Details</h2><br /><br />
+}
+
+<div class="row personal-info">
+    <div class="col-sm-5">
+        <a class="fancy-photo"
+           rel="group" title="@Model.FullName"
+           href="~/Images/MajorPic/@Model.Id">
+            <img src="~/Images/MajorPic/@Model.Id" class="img-responsive img-rounded" />
+        </a>
+    </div>
+    <div class="col-sm-6">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h5>Basic Information</h5>
+                    </div>
+                    <div class="panel-body">
+                        <h5><strong>Name:</strong> @Model.LastName, @Model.FirstName @Model.OtherName</h5>
+                        <h5><strong>Date of Birth:</strong> @Model.Day, @Model.Month </h5>
+                        <h5>
+                            <strong>Gender:</strong> @Model.Gender
+                        </h5>
+                        <h5>
+                            <strong>Marital Status:</strong> @Model.MaritalStatus
+                        </h5>
+                        <h5>
+                            <strong>State of Origin:</strong> @Model.StateOfOrigin
+                        </h5>
+                        <h5>
+                            <strong>LGA:</strong> @Model.Lga
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h5>Personal Information</h5>
+                    </div>
+                    <div class="panel-body">
+                        <h5>
+                            <strong>Phone Number:</strong> @Model.PhoneNumber
+                        </h5>
+                        @Html.Raw(Model.PersonalInfo)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h5>Academic Information</h5>
+                    </div>
+                    <div class="panel-body">
+                        @Html.Raw(Model.AcademicInfo)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <h5>NCCF Information</h5>
+                    </div>
+                    <div class="panel-body">
+                        <h5>
+                            <strong>Position(s):</strong> @Model.Positions
+                        </h5>
+                        @Html.Raw(Model.NccfInfo)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

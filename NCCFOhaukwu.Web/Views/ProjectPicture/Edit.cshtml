@@ -1,0 +1,72 @@
+﻿@model DAL.ProjectPicture
+
+@{
+    ViewBag.Title = "Edit Project Picture";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+<h2>Edit Project Picture</h2>
+
+<div class="col-md-6">
+
+    @using (Html.BeginForm("Edit", "ProjectPicture", FormMethod.Post, new {@class = "form-horizontal", role = "form", enctype = "multipart/form-data"}))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.Photo)
+            @Html.HiddenFor(model => model.ContentType)
+            @Html.HiddenFor(model => model.DateCreated)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProjectId, new {@class = "control-label"})
+                <div class="">
+                    @Html.DropDownList("ProjectId", null, new {@class = "input-lg", @onchange = "FillBatch()", id = "YearId", data_validation = "required", data_validation_error_msg = "The project name field is required"})
+                    @Html.ValidationMessageFor(model => model.ProjectId, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, new {@class = "control-label"})
+                <div class="">
+                    @Html.EditorFor(model => model.Description, new {htmlAttributes = new {@class = "input-lg", @onchange = "FillBatch()", id = "YearId", data_validation = "required", data_validation_error_msg = "The description field is required"}})
+                    @Html.ValidationMessageFor(model => model.Description, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Photo", new {@class = "control-label"})
+                <div class="">
+                    <input class="" name="upload" data-validation="mime" data-validation-allowing="jpg, png, gif" type="file"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Current Photo", new {@class = "control-label"})
+                <div class="">
+                    @if (Model.Photo != null)
+                    {
+                        <img src="~/Images/ProjectPhoto/@Model.Id" class="img-responsive img-thumbnail" style="height: 100px; width: 100px;"/>
+                    }
+                    else
+                    {
+                        <img src="~/img/no-passport.png" class="img-responsive img-thumbnail"/>
+                    }
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="">
+                    <input type="submit" value="Update Project Picture" class="btn btn-mod"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-arrow-left"></i> Back to Project Pictures</a>
+            </div>
+        </div>
+    }
+</div>

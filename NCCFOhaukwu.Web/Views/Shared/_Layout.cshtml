@@ -1,0 +1,305 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title | GreenWari Limited</title>
+    <link rel="shortcut icon" type="image/ico" href='@Url.Content("~/favicon.ico")'/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:500' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+    <link href="~/Wow_Slider/engine1/style.css" rel="stylesheet" />
+    @Styles.Render("~/Content/fullcalendar")
+    @Styles.Render("~/Content/fancybox")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body data-spy="scroll" data-target="#myScrollspy">
+    <div id="wrapper" class="">
+        <nav id="nav-one" class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <a href="@Url.Action("Index", "Home")" class="navbar-brand img-responsive">
+                    <img src="~/Images/test.png" class="img-responsive" />
+                </a>
+                <div class="navbar-header">
+                    <button id="toggle" type="button" class="navbar-toggle toggle" data-toggle="collapse" data-target="">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse site-navigation">
+                    <ul id="nav-one-ul" class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="@Url.Action("Index", "NewHere")">New Here?</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="@Url.Action("Index", "WhoWeAre")">Who We Are <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="/who-we-are/#ourhistory"><i class="fa fa-pencil-square-o"></i> Our History</a>
+                                </li>
+                                <li>
+                                    <a href="/who-we-are/#ourbeliefs"><i class="fa fa-book"></i> Our Beliefs</a>
+                                </li>
+                                <li>
+                                    <a href="/who-we-are/#ourmission"><i class="fa fa-space-shuttle"></i> Our Mission</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="@Url.Action("OurGenerals", "WhoWeAre")"><i class="fa fa-star"></i> Our Generals</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("JesusCorpers", "WhoWeAre")"><i class="fa fa-user"></i> Jesus Corpers</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="@Url.Action("Projects", "WhoWeAre")"><i class="fa fa-folder"></i> Projects</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Gallery", "WhoWeAre")"><i class="fa fa-film"></i> Gallery</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown">Events <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="@Url.Action("Index","Events")"><i class="fa fa-calendar"></i> Upcoming Events</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Birthdays", "Events")"><i class="fa fa-glass"></i> Birthdays</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("News", "News")">News</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Sermons", "Sermon")">Sermon</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Articles", "Article")">Articles</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "Give")">Give</a>
+                        </li>
+                        @Html.Partial("_LoginPartial")
+                    </ul>
+                </div>
+            </div>
+
+        </nav>
+
+        <div class="row-field">
+            @RenderBody()
+        </div>
+        <footer id="footer-top" class="row">
+            <div class="container">
+                <div id="footer-mobile-logo" class="row">
+                    <img src='@Url.Content("~/Images/test.png")' />
+                </div>
+                <div id="footer-mobile" class="row">
+                    <div class="col-xs-6">
+                        <ul class="zero-padding">
+                            <li>
+                                <a href="@Url.Action("Index", "NewHere")">New Here?</a><i class="fa fa-chevron-left"></i>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "WhoWeAre")">Who We Are</a><i class="fa fa-chevron-left"></i>
+                            </li>
+                            <li>
+                                <a href="#">Events</a><i class="fa fa-chevron-left"></i>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("News", "News")">News</a><i class="fa fa-chevron-left"></i>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Sermons", "Sermon")">Sermon</a><i class="fa fa-chevron-left"></i>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Articles", "Article")">Articles</a><i class="fa fa-chevron-left"></i>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Give")">Give</a><i class="fa fa-chevron-left"></i>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-6">
+                        GreenWari Limited,<br />
+                        Port Harcourt,<br />
+                        Rivers, Nigeria.
+                    </div>
+                </div>
+
+                <div id="footer-desktop" class="row">
+                    <div class="col-xs-3">
+                        <img src='@Url.Content("~/Images/test.png")' />
+                        <p>                           
+                            GreenWari Limited,<br />
+                            Port Harcourt,<br />
+                            Rivers, Nigeria.
+                        </p>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul>
+                            <li>Quick Links</li>
+                            <li>
+                                <i class="fa fa-chevron-right"></i><a href="@Url.Action("Index", "NewHere")">New Here?</a>
+                            </li>
+                            <li>
+                                <i class="fa fa-chevron-right"></i><a href="@Url.Action("Index", "WhoWeAre")">Who We Are</a>
+                            </li>
+                            <li>
+                                <i class="fa fa-chevron-right"></i><a href="@Url.Action("Index", "Events")">Events</a>
+                            </li>
+                            <li>
+                                <i class="fa fa-chevron-right"></i><a href="@Url.Action("News", "News")">News</a>
+                            </li>
+                            <li>
+                                <i class="fa fa-chevron-right"></i><a href="@Url.Action("Sermons", "Sermon")">Sermon</a>
+                            </li>
+                            <li>
+                                <i class="fa fa-chevron-right"></i><a href="@Url.Action("Articles", "Article")">Articles</a>
+                            </li>
+                            <li>
+                                <i class="fa fa-chevron-right"></i><a href="@Url.Action("Index", "Give")">Give</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul>
+                            <li>Social</li>
+                            <li>
+                                <i class="fa fa-facebook-square"></i><a href="#">Facebook</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-3">
+                        <ul>
+                            <li>Contact Us</li>
+                            <li>
+                                <i class="fa fa-clock-o"></i><span>Mondays - Fridays, 8:00 a.m - 4:00 p.m</span>
+                            </li>
+                            <li>
+                                <i class="fa fa-envelope-o"></i><span>dak4best&#64;gmail.com</span>
+                            </li>
+                            <li>
+                                <i class="fa fa-phone"></i><span>+234 (0)8055779890</span>
+                            </li>
+                            <li>
+                                <i class="fa fa-home"></i><span>Mr. Martins Compound, No. 29 Woji Estate, Port Harcourt, Rivers State, Nigeria</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <footer id="footer-bottom" class="row">
+            <div class="container">
+                <p>&copy; 2016 GreenWari Limited</p>
+                <p>
+                    Powered by <a href="https://ng.linkedin.com/in/micdak" target="_blank">Dakolo</a>
+                </p>
+            </div>
+        </footer>
+
+
+        <div class="sidebar">
+            <ul>
+                <li>
+                    <a href="@Url.Action("Index", "NewHere")">New Here?</a>
+                </li>
+                <li class="drop">
+                    <a href='@Url.Action("Index", "WhoWeAre")' class="main-link">
+                        Who We Are
+                        <a href="#" id="btnwhowearelink" class="btn btn-default collapse-btn" data-target="#whowearelink" data-toggle="collapse">
+                            <span class="arrow"></span>
+                        </a>
+                    </a>
+                    <div class="collapsing sub-link" id="whowearelink">
+                        <ul>
+                            <li>
+                                <a href="/who-we-are/#ourhistory"><i class="fa fa-pencil-square-o"></i> Our History</a>
+                            </li>
+                            <li>
+                                <a href="/who-we-are/#ourbeliefs"><i class="fa fa-book"></i> Our Beliefs</a>
+                            </li>
+                            <li>
+                                <a href="/who-we-are/#ourmission"><i class="fa fa-space-shuttle"></i> Our Mission</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="@Url.Action("OurGenerals", "WhoWeAre")"><i class="fa fa-star"></i> Our Generals</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("JesusCorpers", "WhoWeAre")"><i class="fa fa-user"></i> Jesus Corpers</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="@Url.Action("Projects", "WhoWeAre")"><i class="fa fa-folder"></i> Projects</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Gallery", "WhoWeAre")"><i class="fa fa-film"></i> Gallery</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="drop">
+                    <a href="#" class="main-link">
+                        Events
+                        <a href="#" id="btnevent1" class="btn btn-default collapse-btn" data-target="#event1" data-toggle="collapse">
+                            <span class="arrow"></span>
+                        </a>
+                    </a>
+                    <div class="collapsing sub-link" id="event1">
+                        <ul>
+                            <li>
+                                <a href="@Url.Action("Index", "Events")"><i class="fa fa-calendar"></i> Upcoming Events</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Birthdays", "Events")"><i class="fa fa-glass"></i> Birthdays</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>@Html.ActionLink("News", "News", "News")</li>
+                <li><a href="@Url.Action("Sermons", "Sermon")">Sermon</a></li>
+                <li><a href="@Url.Action("Articles", "Article")">Articles</a></li>
+                <li>@Html.ActionLink("Give", "Index", "Give")</li>
+                @Html.Partial("_LoginMobilePartial")
+            </ul>
+        </div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/fullcalendar")
+    @Scripts.Render("~/bundles/tinymce")
+    @Scripts.Render("~/bundles/chosen")
+    @Scripts.Render("~/bundles/fancybox")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryFormValidator")
+    @Scripts.Render("~/bundles/slider")
+    @Scripts.Render("~/bundles/custom")
+    @RenderSection("scripts", required: false)
+    <script>
+        $.validate();
+        var config = {
+            '.chosen-select': {},
+            '.chosen-select-deselect': { allow_single_deselect: true },
+            '.chosen-select-no-single': { disable_search_threshold: 10 },
+            '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
+            '.chosen-select-width': { width: "95%" }
+        }
+        for (var selector in config) {
+            if (config.hasOwnProperty(selector)) {
+                $(selector).chosen(config[selector]);
+            }
+        }
+    </script>
+</body>
+</html>

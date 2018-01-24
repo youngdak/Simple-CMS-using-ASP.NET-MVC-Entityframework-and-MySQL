@@ -1,0 +1,51 @@
+﻿@model NCCFOhaukwu.Web.Models.EditUserViewModel
+
+@{
+    ViewBag.Title = "Edit Users";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+<h2>Edit Users</h2>
+
+<div class="col-md-6">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, new {@class = "control-label"})
+                <div class="">
+                    @Html.TextBoxFor(m => m.Email, new {@class = "input-lg", data_validation = "email", data_validation_error_msg = "The email is not valid"})
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Roles", new {@class = "control-label"})
+                <span class="">
+                    @foreach (var item in Model.RolesList)
+                    {
+                        <input type="checkbox" name="SelectedRole" value="@item.Value" checked="@item.Selected" class="checkbox-inline" />
+                        @Html.Label(item.Value, new {@class = "control-label"})
+                    }
+                </span>
+            </div>
+
+            <div class="form-group">
+                <div class="">
+                    <input type="submit" value="Update Users" class="btn btn-mod"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-arrow-left"></i> Back to Users</a>
+            </div>
+        </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

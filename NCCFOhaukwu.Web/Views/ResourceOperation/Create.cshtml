@@ -1,0 +1,54 @@
+﻿@model NCCFOhaukwu.Web.Models.MapOperationsToRoles
+@{
+    ViewBag.Title = "Add Resouce Operations";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+<h2>Add Resouce Operations</h2>
+
+<div class="col-md-6">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.ResourceName, new {@class = "control-label"})
+                <div class="">
+                    @Html.DropDownListFor(m => m.ResourceName, Model.ResoucesList, "Select Resource", new {@class = "input-lg", data_validation = "required", data_validation_error_msg = "The resource name field is required"})
+                    @Html.ValidationMessageFor(m => m.ResourceName, "", new {@class = "text-danger"})
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.RoleName, new {@class = "control-label"})
+                <div class="">
+                    @Html.DropDownListFor(m => m.RoleName, ViewBag.Roles as SelectList, "Select Role", new {@class = "input-lg", data_validation = "required", data_validation_error_msg = "The role name field is required"})
+                    @Html.ValidationMessageFor(m => m.RoleName, "", new {@class = "text-danger"})
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">
+                    Select Operation
+                </label>
+                <div class="">
+                    @foreach (var item in (SelectList) ViewBag.Operations)
+                    {
+                        <input type="checkbox" name="selectedOperations" value="@item.Value" class="checkbox-inline"/>
+                        @Html.Label(item.Text, new {@class = "control-label"})
+                    }
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="">
+                    <input type="submit" class="btn btn-mod" value="Add Resource Operation"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-arrow-left"></i> Back to Resource Operations</a>
+            </div>
+        </div>
+    }
+</div>

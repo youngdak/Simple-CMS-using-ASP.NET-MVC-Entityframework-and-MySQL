@@ -1,0 +1,58 @@
+﻿@model IEnumerable<DAL.NewHere>
+
+@{
+    ViewBag.Title = "New Here";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+<h2>New Here</h2>
+
+<p>
+    @Html.ActionLink("Add New WhoWeAre", "Create", null, new {@class = "btn btn-primary"})
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NewToNccf)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WhatToExpect)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FamilySong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceTimesandLocations)
+        </th>
+        <th></th>
+    </tr>
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            item.NewToNccf = (item.NewToNccf.Length >= 300) ? item.NewToNccf.Substring(0, 300) : item.NewToNccf;
+            item.WhatToExpect = (item.WhatToExpect.Length >= 300) ? item.WhatToExpect.Substring(0, 300) : item.WhatToExpect;
+            item.FamilySong = (item.FamilySong.Length >= 300) ? item.FamilySong.Substring(0, 300) : item.FamilySong;
+            item.ServiceTimesandLocations = (item.ServiceTimesandLocations.Length >= 300) ? item.ServiceTimesandLocations.Substring(0, 300) : item.ServiceTimesandLocations;
+            <tr>
+                <td>
+                    @Html.Raw(item.NewToNccf)
+                </td>
+                <td>
+                    @Html.Raw(item.WhatToExpect)
+                </td>
+                <td>
+                    @Html.Raw(item.FamilySong)
+                </td>
+                <td>
+                    @Html.Raw(item.ServiceTimesandLocations)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    }
+
+</table>

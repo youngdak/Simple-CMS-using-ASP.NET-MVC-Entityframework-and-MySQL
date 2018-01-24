@@ -1,0 +1,29 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<DAL.ProjectPicture>
+
+@{
+    ViewBag.Title = ViewBag.ProjectName + " Pictures";
+    Layout = "~/Views/Shared/_ProjectLayout.cshtml";
+}
+
+
+<span class="container-fluid">@ViewBag.ProjectName Pictures</span>
+<div>
+    @foreach (var pics in Model)
+    {
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <a class="fancy-photo"
+               rel="group" title="@pics.Description"
+               href="~/Images/ProjectPhoto/@pics.Id">
+                <img src="~/Images/ProjectPhoto/@pics.Id" class="img-responsive"/>
+            </a>
+
+            <h5>@pics.Description</h5>
+        </div>
+    }
+
+    <div class="col-xs-12, col-sm-12, col-md-12" style="display: inline-block;">
+        @Html.PagedListPager(Model, page => Url.Action("ProjectPictures", "Project", new { page }),
+            new PagedListRenderOptions {Display = PagedListDisplayMode.IfNeeded, MaximumPageNumbersToDisplay = 10})
+    </div>
+</div>

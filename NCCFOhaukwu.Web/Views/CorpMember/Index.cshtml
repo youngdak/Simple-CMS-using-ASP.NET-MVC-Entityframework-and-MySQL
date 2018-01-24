@@ -1,0 +1,137 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<DAL.CorpMember>
+
+@{
+    ViewBag.Title = "Corp Members";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+<h2>Corp Members</h2>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            @Html.ActionLink("Add New Corp Member", "Create", null, new {@class = "btn btn-primary"})
+        </div>
+    </div>
+    <div class="col-md-6">
+        @using (Html.BeginForm("Index", "CorpMember", FormMethod.Get))
+        {
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="" style="">
+                        <div class="col-xs-8 zero-padding">
+                            <input name="search" id="search" type="text" class="input-lg" value="@ViewBag.search"/>
+                        </div>
+                        <div class="col-xs-4 zero-padding">
+                            <input type="submit" value="Search" class="btn btn-primary btn-search"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<table class="table table-striped table-responsive">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().OtherName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Day)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Month)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().StateOfOrigin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Lga)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().MaritalStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().ServiceYear.Year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Batch.BatchName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().PpaTown)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Positions)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Month)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StateOfOrigin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lga)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaritalStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceYear.Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Batch.BatchName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PpaTown)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Positions)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
+                @Html.ActionLink("Details", "Details", new {id = item.Id}) |
+                @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", "CorpMember", new {page, search = Request["search"]}),
+    new PagedListRenderOptions {Display = PagedListDisplayMode.IfNeeded, MaximumPageNumbersToDisplay = 10})

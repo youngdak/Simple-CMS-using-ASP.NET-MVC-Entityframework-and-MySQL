@@ -1,0 +1,77 @@
+﻿@model NCCFOhaukwu.Web.Models.AlbumPhotos
+
+@{
+    ViewBag.Title = "Add Album Picture";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+<h2>Add Album Picture</h2>
+<div class="col-md-6">
+    <span class="alert-danger">Note: Photos without description won't be added, make sure to add description on all photos</span>
+
+    @using (Html.BeginForm("Create", "AlbumPhoto", FormMethod.Post, new {@class = "form-horizontal", role = "form", enctype = "multipart/form-data"}))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            <div class="form-group">
+                @Html.LabelFor(model => model.YearId, new {@class = "control-label"})
+                <div class="">
+                    @Html.DropDownList("YearId", null, "Select Service Year", new {@class = "input-lg", @onchange = "LoadBatch()", id = "YearId", data_validation = "required", data_validation_error_msg = "The service year field is required"})
+                    @Html.ValidationMessageFor(model => model.YearId, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.BatchId, new {@class = "control-label"})
+                <div class="">
+                    @Html.DropDownListFor(model => model.BatchId, new SelectList(Enumerable.Empty<SelectListItem>(), "Id", "BatchName"), "Select Batch", new {@class = "input-lg", data_validation = "required", data_validation_error_msg = "The batch field is required"})
+                    @Html.ValidationMessageFor(model => model.BatchId, "", new {@class = "text-danger"})
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.AlbumId, new {@class = "control-label"})
+                <div class="">
+                    @Html.DropDownList("AlbumId", null, "Select Album", new {@class = "input-lg", data_validation = "required", data_validation_error_msg = "The album field is required"})
+                    @Html.ValidationMessageFor(model => model.AlbumId, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Album Photo", new {@class = "control-label"})
+                <table class="table">
+                    <tr>
+                        <th>Photo</th>
+                        <th>Description</th>
+                    </tr>
+                    @{
+                        for (var i = 0; i < 10; i++)
+                        {
+                            <tr>
+                                <td> @Html.TextBox("[" + i + "].PictureUpload", null, new {@class = "", type = "file"}) </td>
+                                <td> @Html.TextBox("[" + i + "].Description", null, new {@class = "input-lg"})</td>
+                            </tr>
+                        }
+                    }
+                </table>
+            </div>
+
+            <div class="form-group">
+                <div class="">
+                    <input type="submit" value="Add Album Picture" class="btn btn-mod"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-arrow-left"></i> Back to Album Pictures</a>
+            </div>
+        </div>
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

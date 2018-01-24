@@ -1,0 +1,70 @@
+﻿@model DAL.NewHere
+@{
+    ViewBag.Title = "New Here?";
+}
+
+<div id="nh" class="container">
+    <div class="col-md-3 col-md-push-9" id="myScrollspy">
+        <div class="container-fluid">
+            <ul class="nav nav-tabs nav-stacked affix-top" data-spy="affix" data-offset-top="90">
+                <li class="active">
+                    <a href="#newtonccf">New to NCCF Ohaukwu Zone?</a>
+
+                </li>
+                <li>
+                    <a href="#whattoexpect">What to Expect</a>
+
+                </li>
+                <li>
+                    <a href="#familysong">Family Song</a>
+
+                </li>
+                <li>
+                    <a href="#servicetimesandlocations">Service Times & Locations</a>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="col-md-8 col-md-pull-3">
+        <div id="newtonccf" class="container-fluid">
+            <h1 class="well">New to NCCF Ohaukwu Zone?</h1>
+            <div>
+                @if (Model != null)
+                {
+                    @Html.Raw(Model.NewToNccf)
+                }
+            </div>
+        </div>
+        <div id="whattoexpect" class="container-fluid">
+            <h1 class="well">What to Expect</h1>
+            <div>
+                @if (Model != null)
+                {
+                    @Html.Raw(Model.WhatToExpect)
+                }
+            </div>
+        </div>
+        <div id="familysong" class="container-fluid">
+            <h1 class="well">Family Song</h1>
+            <div>
+                @if (Model != null)
+                {
+                    @Html.Raw(Model.FamilySong)
+                }
+            </div>
+        </div>
+
+        <div id="servicetimesandlocations" class="container-fluid">
+            <h1 class="well">Service Times & Locations</h1>
+            <div>
+                @if (Model != null)
+                {
+                    @Html.Raw(Model.ServiceTimesandLocations)
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,84 @@
+﻿@model IList<DAL.CorpMember>
+@{
+    ViewBag.Title = "Jesus Corpers to Generals";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+<h2>Jesus Corpers to Generals</h2>
+@using (Html.BeginForm("JesusCorpMembersToGenerals", "CorpMember", FormMethod.Get))
+{
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="">Service Year</label>
+            @Html.DropDownList("year", null, "All", new {@class = "input-sm", name = "year", @onchange = "FillBatch()"})
+        </div>
+        <div class="form-group">
+            <label class="">Batch</label>
+            @Html.DropDownList("batch", null, "All", new {@class = "input-sm"})
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-mod-sm">Search</button>
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm("JesusCorpMembersToGenerals", "CorpMember", FormMethod.Post))
+{
+    <table class="table">
+        <tr>
+            <th>Name</th>
+            <th>Is General</th>
+        </tr>
+        @{
+            for (var i = 0; i < Model.Count(); i++)
+            {
+                <tr>
+                    <td> @Html.DisplayFor(model => model[i].FullName) </td>
+                    <td>
+                        @Html.HiddenFor(model => model[i].Id)
+                        @Html.HiddenFor(model => model[i].FirstName)
+                        @Html.HiddenFor(model => model[i].LastName)
+                        @Html.HiddenFor(model => model[i].OtherName)
+                        @Html.HiddenFor(model => model[i].Gender)
+                        @Html.HiddenFor(model => model[i].Day)
+                        @Html.HiddenFor(model => model[i].Month)
+                        @Html.HiddenFor(model => model[i].Year)
+                        @Html.HiddenFor(model => model[i].StateOfOrigin)
+                        @Html.HiddenFor(model => model[i].Lga)
+                        @Html.HiddenFor(model => model[i].MaritalStatus)
+                        @Html.HiddenFor(model => model[i].Positions)
+                        @Html.HiddenFor(model => model[i].PositionIds)
+                        @Html.HiddenFor(model => model[i].PpaTown)
+                        @Html.HiddenFor(model => model[i].PersonalInfo)
+                        @Html.HiddenFor(model => model[i].AcademicInfo)
+                        @Html.HiddenFor(model => model[i].NccfInfo)
+                        @Html.HiddenFor(model => model[i].YearId)
+                        @Html.HiddenFor(model => model[i].BatchId)
+                        @Html.HiddenFor(model => model[i].IsLeader)
+                        @Html.HiddenFor(model => model[i].MiniContentType)
+                        @Html.HiddenFor(model => model[i].MiniImage)
+                        @Html.HiddenFor(model => model[i].MajorContentType)
+                        @Html.HiddenFor(model => model[i].MajorImage)
+                        @Html.HiddenFor(model => model[i].FullName)
+                        @Html.HiddenFor(model => model[i].PhoneNumber)
+                        <div class="">
+                            @Html.CheckBoxFor(model => model[i].IsGeneral)
+                            @Html.ValidationMessageFor(model => model[i].IsGeneral, "", new {@class = "text-danger"})
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-mod-sm">Update</button>
+    </div>
+}
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

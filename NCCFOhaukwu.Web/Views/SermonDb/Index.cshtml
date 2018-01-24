@@ -1,0 +1,76 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<DAL.Sermon>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+<h2>Sermons</h2>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            @Html.ActionLink("Add New Sermon", "Create", null, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+    <div class="col-md-6">
+        @using (Html.BeginForm("Index", "SermonDb", FormMethod.Get))
+        {
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="" style="">
+                        <div class="col-xs-8 zero-padding">
+                            <input name="search" id="search" type="text" class="input-lg" value="@ViewBag.search" />
+                        </div>
+                        <div class="col-xs-4 zero-padding">
+                            <input type="submit" value="Search" class="btn btn-primary btn-search" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Scriptures)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Message)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Date)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Scriptures)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Message)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", "SermonDb", new {page, search = Request["search"]}),
+    new PagedListRenderOptions {Display = PagedListDisplayMode.IfNeeded, MaximumPageNumbersToDisplay = 10})

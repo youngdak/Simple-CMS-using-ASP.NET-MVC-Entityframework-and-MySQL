@@ -1,0 +1,242 @@
+﻿@model NCCFOhaukwu.Web.Models.CorpMembers
+
+@{
+    ViewBag.Title = "Edit Corp Member";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+<h2>Edit Corp Member</h2>
+
+<div class="col-md-8">
+@using (Html.BeginForm("Edit", "CorpMember", FormMethod.Post, new {@class = "form-horizontal", role = "form", enctype = "multipart/form-data"}))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.FullName)
+    @Html.HiddenFor(model => model.Positions)
+    @Html.HiddenFor(model => model.MiniImage)
+    @Html.HiddenFor(model => model.MiniContentType)
+    @Html.HiddenFor(model => model.MajorImage)
+    @Html.HiddenFor(model => model.MajorContentType)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FirstName, new {@class = "control-label"})
+        <div class="">
+            @Html.EditorFor(model => model.FirstName, new {htmlAttributes = new {@class = "input-lg", data_validation = "required", data_validation_error_msg = "The first name field is required"}})
+            @Html.ValidationMessageFor(model => model.FirstName, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LastName, new {@class = "control-label"})
+        <div class="">
+            @Html.EditorFor(model => model.LastName, new {htmlAttributes = new {@class = "input-lg", data_validation = "required", data_validation_error_msg = "The last name field is required"}})
+            @Html.ValidationMessageFor(model => model.LastName, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.OtherName, new {@class = "control-label"})
+        <div class="">
+            @Html.EditorFor(model => model.OtherName, new {htmlAttributes = new {@class = "input-lg"}})
+            @Html.ValidationMessageFor(model => model.OtherName, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PhoneNumber, new {@class = "control-label"})
+        <div class="">
+            @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "input-lg", data_validation_length = "11-11", data_validation = "required length", data_validation_error_msg = "The phone number field is required and must be 11 digits" } })
+            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Gender, new {@class = "control-label"})
+        <div class="">
+            @Html.DropDownListFor(m => m.Gender, Model.GenderList, "Select Gender", new {@class = "input-lg", data_validation = "required", data_validation_error_msg = "The gender field is required"})
+            @Html.ValidationMessageFor(m => m.Gender, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Birthday</label><br/>
+        <div class="col-md-3 zero-padding">
+            @Html.LabelFor(model => model.Day, new {@class = "control-label"})
+            @Html.EditorFor(model => model.Day, new {htmlAttributes = new {@class = "input-sm", data_validation = "number", data_validation_allowing = "range[1;31]", data_validation_error_msg = "The day field must be from 1 to 31"}})
+            @Html.ValidationMessageFor(model => model.Day, "", new {@class = "text-danger"})
+        </div>
+        <div class="col-md-4 col-md-offset-1 zero-padding">
+            @Html.LabelFor(model => model.Month, new {@class = "control-label"})
+            @Html.DropDownListFor(m => m.Month, Model.MonthList, new {@class = "input-sm", data_validation = "required", data_validation_error_msg = "The month field is required"})
+            @Html.ValidationMessageFor(m => m.Gender, "", new {@class = "text-danger"})
+        </div>
+        <div class="col-md-3 col-md-offset-1 zero-padding">
+            @Html.LabelFor(model => model.Year, new {@class = "control-label"})
+            @Html.EditorFor(model => model.Year, new {htmlAttributes = new {@class = "input-sm", data_validation = "number", data_validation_allowing = "range[1900;2010]", data_validation_error_msg = "The year field must be from 1900 to 2010"}})
+            @Html.ValidationMessageFor(model => model.Year, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StateOfOrigin, new {@class = "control-label"})
+        <div class="">
+            @Html.EditorFor(model => model.StateOfOrigin, new {htmlAttributes = new {@class = "input-lg", data_validation = "required", data_validation_error_msg = "The state field is required"}})
+            @Html.ValidationMessageFor(model => model.StateOfOrigin, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Lga, new {@class = "control-label"})
+        <div class="">
+            @Html.EditorFor(model => model.Lga, new {htmlAttributes = new {@class = "input-lg"}})
+            @Html.ValidationMessageFor(model => model.Lga, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.MaritalStatus, new {@class = "control-label"})
+        <div class="">
+            @Html.DropDownListFor(m => m.MaritalStatus, Model.MaritalStatusList, "Select Marital Status", new {@class = "input-lg", data_validation = "required", data_validation_error_msg = "The marital status field is required"})
+            @Html.ValidationMessageFor(m => m.MaritalStatus, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Positions, new {@class = "control-label"})
+        <div class="">
+            @Html.ListBoxFor(x => x.SelectedPositions, (ViewBag.PortfolioId) as SelectList, new { @class = "chosen-select input-lg", multiple = "multiple", data_placeholder = "choose position(s)", data_validation_error_msg = "The position field is required" })
+            @Html.ValidationMessageFor(model => model.Positions, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PpaTown, new {@class = "control-label"})
+        <div class="">
+            @Html.DropDownListFor(m => m.PpaTown, Model.PpaTownList, "Select Sub Zone", new {@class = "input-lg", data_validation = "required", data_validation_error_msg = "The sub zone field is required"})
+            @Html.ValidationMessageFor(m => m.PpaTown, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PersonalInfo, new {@class = "control-label"})
+        <div class="">
+            @Html.TextAreaFor(model => model.PersonalInfo, new {htmlAttributes = new {@class = "input-lg"}})
+            @Html.ValidationMessageFor(model => model.PersonalInfo, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.AcademicInfo, new {@class = "control-label"})
+        <div class="">
+            @Html.TextAreaFor(model => model.AcademicInfo, new { htmlAttributes = new { @class = "input-lg" } })
+            @Html.ValidationMessageFor(model => model.AcademicInfo, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.NccfInfo, new {@class = "control-label"})
+        <div class="">
+            @Html.TextAreaFor(model => model.NccfInfo, new { htmlAttributes = new { @class = "input-lg" } })
+            @Html.ValidationMessageFor(model => model.NccfInfo, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.YearId, new {@class = "control-label"})
+        <div class="">
+            @Html.DropDownList("YearId", null, "Select Year", new {@class = "input-lg", data_validation = "required", data_validation_error_msg = "The service year field is required", @onchange = "LoadBatch()", id = "YearId"})
+            @Html.ValidationMessageFor(model => model.YearId, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.BatchId, new {@class = "control-label"})
+        <div class="">
+            @Html.DropDownListFor(model => model.BatchId, null, new {@class = "input-lg", data_validation = "required", data_validation_error_msg = "The batch field is required"})
+            @Html.ValidationMessageFor(model => model.BatchId, "", new {@class = "text-danger"})
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Mini Image", new {@class = "control-label"})
+        <div class="">
+            <input class="" name="miniUpload" data-validation="mime" data-validation-allowing="jpg, png, gif" type="file"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Current Mini Pic", new {@class = "control-label"})
+        <div class="">
+            @if (Model.MiniImage != null)
+            {
+                <img src="~/Images/MiniPic/@Model.Id" class="img-responsive img-thumbnail" style="height: 100px; width: 100px;"/>
+            }
+            else
+            {
+                <img src="~/img/no-passport.png" class="img-responsive img-thumbnail"/>
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Major Image", new {@class = "control-label"})
+        <div class="">
+            <input class="" name="majorUpload" data-validation="mime" data-validation-allowing="jpg, png, gif" type="file"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Current Major Pic", new {@class = "control-label"})
+        <div class="">
+            @if (Model.MajorImage != null)
+            {
+                <img src="~/Images/MajorPic/@Model.Id" class="img-responsive img-thumbnail" style="height: 100px; width: 100px;"/>
+            }
+            else
+            {
+                <img src="~/img/no-passport.png" class="img-responsive img-thumbnail"/>
+            }
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IsGeneral, new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.IsGeneral)
+                @Html.ValidationMessageFor(model => model.IsGeneral, "", new {@class = "text-danger"})
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.IsLeader, new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.IsLeader)
+                @Html.ValidationMessageFor(model => model.IsLeader, "", new {@class = "text-danger"})
+            </div>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="">
+            <input type="submit" value="Update Corp Member" class="btn btn-mod"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-arrow-left"></i> Back to Corp Members</a>
+    </div>
+    </div>
+}
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

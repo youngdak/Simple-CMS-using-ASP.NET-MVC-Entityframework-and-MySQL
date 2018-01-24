@@ -1,0 +1,107 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<DAL.CorpMember>
+
+@{
+    ViewBag.Title = "Jesus Corpers";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+
+<div class="row general whoweare">
+    <div class=" col-md-3 col-md-push-9">
+        <div class="row static-search">
+            <div class="container-fluid">
+                <div>
+                    <label class="control-label">Filter:</label>
+                </div>
+                @using (Html.BeginForm("JesusCorpers", "WhoWeAre", FormMethod.Get))
+                {
+                    <div class="form-horizontal container-fluid">
+                        <div class="form-group">
+                            <div>
+                                <label class="control-label">Service Year</label>
+                                @Html.DropDownList("year", null, new {@class = "input-sm", name = "year", @onchange = "FillBatch()"})
+                            </div>
+                            <div>
+                                <label class="control-label">Batch</label>
+                                @Html.DropDownList("batch", null, "All", new {@class = "input-sm"})
+                            </div>
+                            <div>
+                                <label class="control-label">Position</label>
+                                @Html.DropDownList("position", null, new {@class = "input-sm"})
+                            </div>
+                            <div>
+                                <label class="control-label">Search</label>
+                                <input value="@ViewBag.search" name="search" id="search" type="text" class="input-sm"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <input type="submit" value="Search" class="btn btn-mod-sm"/>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-9 col-md-pull-3 span-center-left">
+        <span class="container-fluid">Jesus Corpers</span>
+        <div class="container-fluid">
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="@ViewBag.ezzangbo">
+                    <a href="@Url.Action("JesusCorpers", "WhoWeAre", new {ppatown = "ezzangbo", search = Request["search"], year = Request["year"], batch = Request["batch"], position = Request["position"]})">Ezzangbo</a>
+                </li>
+                <li role="presentation" class="@ViewBag.ngbo">
+                    <a href="@Url.Action("JesusCorpers", "WhoWeAre", new {ppatown = "ngbo", search = Request["search"], year = Request["year"], batch = Request["batch"], position = Request["position"]})">Ngbo</a>
+                </li>
+                <li role="presentation" class="@ViewBag.effium">
+                    <a href="@Url.Action("JesusCorpers", "WhoWeAre", new {ppatown = "effium", search = Request["search"], year = Request["year"], batch = Request["batch"], position = Request["position"]})">Effium</a>
+                </li>
+            </ul>
+
+            <div class="tab-content whoweare-tab-content">
+                <div class="tab-pane active">
+                    <div class="container-fluid">
+                        <br/>
+                        @if (Model.Count > 0)
+                        {
+                            foreach (var jesuscorper in Model)
+                            {
+                                <div class="col-md-4 col-sm-4">
+                                    <a class="fancy-photo"
+                                       rel="group" title="@jesuscorper.FullName"
+                                       href="~/Images/MajorPic/@jesuscorper.Id">
+                                        <img src="~/Images/MiniPic/@jesuscorper.Id" class="img-responsive img-circle" />
+                                    </a>
+                                    <h5>@jesuscorper.LastName, @jesuscorper.FirstName @jesuscorper.OtherName</h5>
+                                    <h5><strong>Position(s):</strong> @jesuscorper.Positions</h5>
+                                    <h5>Batch @jesuscorper.Batch.BatchName, @jesuscorper.ServiceYear.Year</h5>
+                                    <a href="@Url.Action("CorpMember", "WhoWeAre", new {id = @jesuscorper.Id})" class="btn btn-mod">More Details</a>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="null-search-result">
+                                <div class="col-sm-12 col-md-12 col-lg-12 well">
+                                    <span>No search results</span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                @Html.PagedListPager(Model, page => Url.Action("JesusCorpers", "WhoWeAre", new {page, search = Request["search"], year = Request["year"], batch = Request["batch"], position = Request["position"], ppatown = Request["ppatown"]}),
+                    new PagedListRenderOptions {Display = PagedListDisplayMode.IfNeeded, MaximumPageNumbersToDisplay = 10})
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

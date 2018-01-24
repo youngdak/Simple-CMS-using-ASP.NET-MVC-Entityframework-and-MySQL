@@ -1,0 +1,87 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<DAL.AlbumPhoto>
+@{
+    ViewBag.Title = "Gallery";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+
+    int i = 2;
+}
+
+
+<div class="row general whoweare">
+    <div class="col-md-3 col-md-push-9">
+        <div class="row static-search">
+            <div class="container-fluid">
+                <div>
+                    <label class="control-label">Filter:</label>
+                </div>
+                @using (Html.BeginForm("Gallery", "WhoWeAre", FormMethod.Get))
+                {
+                    <div class="form-horizontal container-fluid">
+                        <div class="form-group">
+                            <div>
+                                <label class="control-label">Zone/Sub Zone</label>
+                                @Html.DropDownList("subzone", null, new {@class = "input-sm", name = "subzone", @onchange = "FillAlbum()"})
+                            </div>
+                            <div>
+                                <label class="control-label">Album</label>
+                                @Html.DropDownList("album", null, "All", new {@class = "input-sm"})
+                            </div>
+                            <div>
+                                <label class="control-label">Service Year</label>
+                                @Html.DropDownList("year", null, new {@class = "input-sm", name = "year", @onchange = "FillBatch()"})
+                            </div>
+                            <div>
+                                <label class="control-label">Batch</label>
+                                @Html.DropDownList("batch", null, "All", new {@class = "input-sm"})
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <input type="submit" value="Search" class="btn btn-mod-sm"/>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-9 col-md-pull-3 span-center-left">
+        <span class="container-fluid">Gallery</span>
+        @if (Model.Count > 0)
+        {
+            <div class="whoweare-gallery">
+                @foreach (var albumPhoto in Model)
+                {
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <a class="fancy-photo"
+                           rel="group" title="@albumPhoto.Description"
+                           href="~/Images/AlbumPhoto/@albumPhoto.Id">
+                            <img src="~/Images/AlbumPhoto/@albumPhoto.Id" class="img-responsive" />
+                        </a>
+                        <h5>@albumPhoto.Description</h5>
+                    </div>
+                    i++;
+                }
+            </div>
+            <div class="col-xs-12, col-sm-12, col-md-12" style="display: inline-block;">
+                @Html.PagedListPager(Model, page => Url.Action("Gallery", "WhoWeAre", new {page, year = Request.QueryString["year"], batch = Request.QueryString["batch"], album = Request.QueryString["album"], subzone = Request.QueryString["subzone"]}),
+                    new PagedListRenderOptions {Display = PagedListDisplayMode.IfNeeded, MaximumPageNumbersToDisplay = 5})
+            </div>
+        }
+        else
+        {
+            <div class="null-search-result">
+                <div class="col-sm-12 col-md-12 col-lg-12 well">
+                    <span>No search results</span>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,64 @@
+[
+  {
+    "staffId": "GW001",
+    "name": "Gate, Bill",
+    "teacherClassSubjects": [
+      {
+        "class": "JSS1",
+        "subjects": [
+          {
+            "id": "5738f54dc6243c0db498c81a",
+            "name": "Physics",
+            "index": 0
+          }
+        ],
+        "id": "5738f58bc6243c0db498c81c"
+      },
+      {
+        "class": "JSS1",
+        "subjects": [
+          {
+            "id": "5738f556c6243c0db498c81b",
+            "name": "Government",
+            "index": 1
+          }
+        ],
+        "id": "5738f58bc6243c0db498c81c"
+      }
+    ]
+  },
+  {
+    "staffId": "GW001",
+    "name": "Gate, Bill",
+    "teacherClassSubjects": [
+      {
+        "class": "JSS2",
+        "subjects": [
+          {
+            "id": "5738f54dc6243c0db498c81a",
+            "name": "Physics",
+            "index": 0
+          }
+        ],
+        "id": "573b4d95c6244019b8d1699c"
+      }
+    ]
+  },
+  {
+    "staffId": "GW002",
+    "name": "Benjamin, Ebimobowei",
+    "teacherClassSubjects": [
+      {
+        "class": "SS1",
+        "subjects": [
+          {
+            "id": "5738f54dc6243c0db498c81a",
+            "name": "Physics",
+            "index": 0
+          }
+        ],
+        "id": "574d0c4c2d814b125c67a231"
+      }
+    ]
+  }
+]

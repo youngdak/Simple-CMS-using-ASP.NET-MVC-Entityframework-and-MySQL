@@ -1,0 +1,48 @@
+﻿@using System.Text.RegularExpressions
+@using PagedList.Mvc
+@model PagedList.IPagedList<DAL.News>
+
+@{
+    ViewBag.Title = "News";
+    Layout = "~/Views/Shared/_NewsLayout.cshtml";
+}
+
+<span class="container-fluid">News</span>
+@foreach (var news in Model)
+{
+    <div class="general-news">
+        <span>@news.Title</span>
+        <div class="row">
+            <div class="col-xs-8 col-md-5">
+                <a href="@Url.Action("AuthorNews", "Author", new {username = news.Username.Replace(" ", "-").ToLower()})"><i class="fa fa-user"></i>&nbsp;&nbsp;@news.Author.FullName</a>
+            </div>
+            <div class="col-xs-4 col-md-7">
+                <a href="@Url.Action("News", "News")"><i class="fa fa-folder-open-o"></i>&nbsp;&nbsp;News</a>
+            </div>
+        </div><br/>
+        <p>
+            posted on <strong>@news.DateCreated.ToString("D")</strong>
+        </p>
+        <hr/>
+        @if (news.Photo != null)
+        {
+            <div class="row">
+                <div class="container-fluid">
+                    <img src="~/Images/NewsPhoto/@news.Id" class="img-responsive"/>
+                </div>
+            </div>
+        }
+        @{
+            var thenews = Regex.Replace(news.TheNews, "<.*?>", string.Empty);
+            thenews = (thenews.Length >= 300) ? thenews.Substring(0, 300) : thenews;
+        }
+
+        <span>@thenews ...</span>
+
+        <a class="btn btn-mod" href="@Url.Action("SingleNews", "News", new { id = news.Id, title = Regex.Replace(news.Title, "[^a-zA-Z0-9 ]", "").Replace(" ", "-").ToLower() })">Continue Reading</a>
+
+    </div>
+}
+
+@Html.PagedListPager(Model, page => Url.Action("News", "News", new {page}),
+    new PagedListRenderOptions {Display = PagedListDisplayMode.IfNeeded, MaximumPageNumbersToDisplay = 10})

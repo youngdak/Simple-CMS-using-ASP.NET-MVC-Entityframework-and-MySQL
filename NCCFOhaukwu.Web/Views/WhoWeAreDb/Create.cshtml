@@ -1,0 +1,60 @@
+﻿@model NCCFOhaukwu.Web.Models.WhoWeAreModel
+
+@{
+    ViewBag.Title = "Add WhoWeAre";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+<h2>Add WhoWeAre</h2>
+
+<div class="col-md-8">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            <div class="form-group">
+                @Html.LabelFor(model => model.Whoweare, new {@class = "control-label"})
+                <div>
+                    @Html.TextAreaFor(model => model.Whoweare, new { htmlAttributes = new { @class = "input-lg" } })
+                    @Html.ValidationMessageFor(model => model.Whoweare, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.OurHistory, new {@class = "control-label"})
+                <div>
+                    @Html.TextAreaFor(model => model.OurHistory, new { htmlAttributes = new { @class = "input-lg" } })
+                    @Html.ValidationMessageFor(model => model.OurHistory, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.OurBeliefs, new {@class = "control-label"})
+                <div>
+                    @Html.TextAreaFor(model => model.OurBeliefs, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.OurBeliefs, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.OurMission, new {@class = "control-label"})
+                <div>
+                    @Html.TextAreaFor(model => model.OurMission, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.OurMission, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="">
+                    <input type="submit" value="Add WhoWeAre" class="btn btn-mod"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-arrow-left"></i> Back to WhoWeAre</a>
+            </div>
+        </div>
+    }
+</div>

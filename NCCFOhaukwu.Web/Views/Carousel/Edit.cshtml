@@ -1,0 +1,63 @@
+﻿@model DAL.Carousel
+
+@{
+    ViewBag.Title = "Edit Carousel";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+
+<h2>Edit Carousel</h2>
+
+<div class="col-md-6">
+
+    @using (Html.BeginForm("Edit", "Carousel", FormMethod.Post, new {@class = "form-horizontal", role = "form", enctype = "multipart/form-data"}))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.ContentType)
+            @Html.HiddenFor(model => model.Img)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, new {@class = "control-label"})
+                <div>
+                    @Html.EditorFor(model => model.Title, new {htmlAttributes = new {@class = "input-lg", data_validation = "required", data_validation_error_msg = "The title field is required"}})
+                    @Html.ValidationMessageFor(model => model.Title, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Carousel Image", new {@class = "control-label"})
+                <div class="">
+                    <input class="" name="upload" data-validation="mime size" data-validation-allowing="jpg, png, gif" type="file"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Current Photo", new {@class = "control-label"})
+                <div class="">
+                    @if (Model.Img != null)
+                    {
+                        <img src="~/Images/CarouselImg/@Model.Id" class="img-responsive img-thumbnail" style="height: 100px; width: 100px;"/>
+                    }
+                    else
+                    {
+                        <img src="~/img/no-passport.png" class="img-responsive img-thumbnail"/>
+                    }
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="">
+                    <input type="submit" value="Update Carousel" class="btn btn-mod"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-arrow-left"></i> Back to Carousels</a>
+            </div>
+        </div>
+    }
+</div>

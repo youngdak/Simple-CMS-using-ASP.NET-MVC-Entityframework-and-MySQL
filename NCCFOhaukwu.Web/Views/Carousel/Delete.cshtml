@@ -1,0 +1,58 @@
+﻿@model DAL.Carousel
+
+@{
+    ViewBag.Title = "Delete Carousel";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+<h2>Delete Carousel</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Img)
+        </dt>
+
+        <dd>
+            <div class="">
+                @if (Model.Img != null)
+                {
+                    <img src="~/Images/CarouselImg/@Model.Id" class="img-responsive img-thumbnail" style="height: 100px; width: 100px;"/>
+                }
+                else
+                {
+                    <img src="~/img/no-passport.png" class="img-responsive img-thumbnail"/>
+                }
+            </div>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContentType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContentType)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete Carousel" class="btn btn-mod"/> <br/><br/>
+            <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-arrow-left"></i> Back to Carousels</a>
+        </div>
+    }
+</div>

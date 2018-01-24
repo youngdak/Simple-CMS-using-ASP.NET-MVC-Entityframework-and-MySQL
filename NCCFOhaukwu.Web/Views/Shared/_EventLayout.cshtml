@@ -1,0 +1,43 @@
+﻿@using System.Text.RegularExpressions
+@using MySql.BLL.Service
+@{
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+    
+    IService service = new Service();
+    var events = service.Event.Get().Where(x => x.start >= DateTime.Now.Date).Take(3).OrderBy(x => x.start);
+}
+
+<div class="container-fluid event-layout">
+    <div class="row">
+        <div class="col-md-7 event">
+            @RenderBody()
+        </div>
+
+        <div class="col-md-3  col-md-offset-2">
+            <div class="row">
+                <div class="container-fluid more-events">
+                    <a href="@Url.Action("Index", "Events")">More Events</a>
+                    @foreach (var singleEvent in events)
+                    {
+                        <div class="">
+                            <div>
+                                <div class="">
+                                    <div class="panel">
+                                        <div class="panel-heading">@singleEvent.StartDay</div>
+                                        <div class="panel-heading">@singleEvent.StartMonth</div>
+                                    </div>
+                                    <a href="#">
+                                        @singleEvent.title
+                                    </a><br />
+                                    <span>@singleEvent.StartTime - @singleEvent.EndTime</span>
+                                    <span>&#64 @singleEvent.Venue</span><br />
+                                    <a href="@Url.Action("SignleEvent", "Events", new { title = Regex.Replace(singleEvent.title, "[^a-zA-Z0-9 ]", "").Replace(" ", "-").ToLower(), start = singleEvent.start.ToString("dd/MM/yyyy").Replace("/", "-") })" class="btn btn-mod">Learn more</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

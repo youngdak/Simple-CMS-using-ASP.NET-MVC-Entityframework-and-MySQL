@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NCCFOhaukwu.Web", "NCCFOhaukwu.Web\NCCFOhaukwu.Web.csproj", "{79C1B1C2-8B0B-4C61-99C7-66F9397F5AD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySql.BLL", "MySql.BLL\MySql.BLL.csproj", "{12178617-25AC-42C1-B0F8-2FEC80C5BB53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{0DCAD6AB-2519-486A-92BD-1B40CBFC7C81}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{79C1B1C2-8B0B-4C61-99C7-66F9397F5AD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79C1B1C2-8B0B-4C61-99C7-66F9397F5AD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79C1B1C2-8B0B-4C61-99C7-66F9397F5AD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79C1B1C2-8B0B-4C61-99C7-66F9397F5AD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12178617-25AC-42C1-B0F8-2FEC80C5BB53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12178617-25AC-42C1-B0F8-2FEC80C5BB53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12178617-25AC-42C1-B0F8-2FEC80C5BB53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12178617-25AC-42C1-B0F8-2FEC80C5BB53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DCAD6AB-2519-486A-92BD-1B40CBFC7C81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DCAD6AB-2519-486A-92BD-1B40CBFC7C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DCAD6AB-2519-486A-92BD-1B40CBFC7C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DCAD6AB-2519-486A-92BD-1B40CBFC7C81}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

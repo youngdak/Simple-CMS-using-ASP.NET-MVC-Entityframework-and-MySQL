@@ -1,0 +1,33 @@
+﻿@model DAL.Batch
+
+@{
+    ViewBag.Title = "Batch Details";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+<h2>Batch Details</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Year.Year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year.Year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BatchName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BatchName)
+        </dd>
+
+    </dl>
+</div>
+<div class="form-group">
+    <a href="@Url.Action("Edit", "Batch", new {id = Model.Id})" class="btn btn-primary"><i class="fa fa-edit"></i> Edit Batch</a><br/><br/>
+    <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-arrow-left"></i> Back to Batches</a>
+</div>

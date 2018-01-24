@@ -1,0 +1,49 @@
+﻿@model DAL.Album
+
+@{
+    ViewBag.Title = "Album Details";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+<h2>Album Details</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubZone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubZone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateModified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateModified)
+        </dd>
+
+    </dl>
+</div>
+<div class="form-group">
+    <a href="@Url.Action("Edit", "Album", new {id = Model.Id})" class="btn btn-primary"><i class="fa fa-edit"></i> Edit Album</a><br/><br/>
+    <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-arrow-left"></i> Back to Albums</a>
+</div>

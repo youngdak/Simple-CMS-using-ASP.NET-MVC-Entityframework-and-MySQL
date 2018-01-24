@@ -1,0 +1,38 @@
+﻿@model DAL.Portfolio
+
+@{
+    ViewBag.Title = "Add New Portfolio";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+<h2>Add New Portfolio</h2>
+
+<div class="col-md-6">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            <div class="form-group">
+                @Html.LabelFor(model => model.Position, new {@class = "control-label"})
+                <div class="">
+                    @Html.EditorFor(model => model.Position, new {htmlAttributes = new {@class = "input-lg", data_validation = "required", data_validation_error_msg = "The position field is required"}})
+                    @Html.ValidationMessageFor(model => model.Position, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="">
+                    <input type="submit" value="Add Portfolio" class="btn btn-mod"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-arrow-left"></i> Back to Portfolios</a>
+            </div>
+        </div>
+    }
+</div>

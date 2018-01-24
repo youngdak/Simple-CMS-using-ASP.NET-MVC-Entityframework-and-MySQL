@@ -1,0 +1,14 @@
+﻿@model DAL.Project
+@{
+    ViewBag.Title = @Model.Name;
+    Layout = "~/Views/Shared/_ProjectLayout.cshtml";
+}
+
+<span class="container-fluid">@Model.Name</span>
+<p class="container-fluid">
+    posted on <strong>@Model.DateCreated.ToString("D")</strong>
+</p>
+@*<p style="display: inline-block;" class="container">modified on <strong>@Model.DateModified.ToString("D")</strong></p>*@
+<div class="container-fluid">
+    <span class="">@Html.Raw(Model.Milestone)</span>
+</div>

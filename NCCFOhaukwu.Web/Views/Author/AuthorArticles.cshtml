@@ -1,0 +1,40 @@
+﻿@using System.Text.RegularExpressions
+@using PagedList.Mvc
+@model PagedList.IPagedList<DAL.Articles>
+
+@{
+    ViewBag.Title = ViewBag.authorname + ", Author at NCCF Ohaukwu";
+    Layout = "~/Views/Shared/_ArticleLayout.cshtml";
+}
+
+
+<span class="container">Author Archives: "@ViewBag.authorname"</span>
+@foreach (var article in Model)
+{
+    <div class="general-news">
+        <span class="">@article.Title</span>
+        <div class="row">
+            <div class="col-xs-6 col-md-3">
+                <a href="@Url.Action("CorpMember", "WhoWeAre", new {id = @article.Author.Id})"><i class="fa fa-user"></i>&nbsp;&nbsp;About Author</a>
+            </div>
+            <div class="col-xs-6 col-md-9">
+                <a href="@Url.Action("Articles", "Article")"><i class="fa fa-folder-open-o"></i>&nbsp;&nbsp;Articles</a>
+            </div>
+        </div><br/>
+        <p>
+            posted on <strong>@article.DateCreated.ToString("D")</strong>
+        </p>
+        <hr/>
+        @{
+            var thenews = Regex.Replace(article.Article, "<.*?>", string.Empty);
+            thenews = (thenews.Length >= 300) ? thenews.Substring(0, 300) : thenews;
+        }
+        <span>@thenews ...</span>
+
+        <a class="btn btn-mod" href="@Url.Action("Article", "Article", new {id = article.Id, title = article.Title.Replace(" ", "-").ToLower()})">Continue Reading</a>
+
+    </div>
+}
+
+@Html.PagedListPager(Model, page => Url.Action("AuthorArticles", "Author", new {page}),
+    new PagedListRenderOptions {Display = PagedListDisplayMode.IfNeeded, MaximumPageNumbersToDisplay = 10})

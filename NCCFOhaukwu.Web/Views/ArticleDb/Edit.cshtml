@@ -1,0 +1,69 @@
+﻿@model NCCFOhaukwu.Web.Models.ArticlesModel
+
+@{
+    ViewBag.Title = "Edit Article";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+<h2>Edit Article</h2>
+
+<div class="col-md-8">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.DateCreated)
+            @Html.HiddenFor(model => model.Username)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AuthorId, new {@class = "control-label"})
+                <div class="">
+                    @Html.DropDownList("AuthorId", null, "Select Author", new {@class = "input-lg", data_validation = "required", data_validation_error_msg = "The author name field is required"})
+                    @Html.ValidationMessageFor(model => model.AuthorId, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, new {@class = "control-label"})
+                <div class="">
+                    @Html.EditorFor(model => model.Title, new {htmlAttributes = new {@class = "input-lg", data_validation = "required", data_validation_error_msg = "The title field is required"}})
+                    @Html.ValidationMessageFor(model => model.Title, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Article, new {@class = "control-label"})
+                <div>
+                    @Html.TextAreaFor(model => model.Article, new {htmlAttributes = new {@class = "input-lg"}})
+                    @Html.ValidationMessageFor(model => model.Article, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Display, new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(model => model.Display, new {id = "Display", @onclick = "checkarticledisplay()"})
+                        @Html.ValidationMessageFor(model => model.Display, "", new {@class = "text-danger"})
+                        <label id="displaylabel" style="color: red;"></label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="">
+                    <input type="submit" value="Update Article" class="btn btn-mod" id="createArticle" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-arrow-left"></i> Back to Articles</a>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,70 @@
+﻿@model DAL.WhoWeAre
+@{
+    ViewBag.Title = "Who We Are";
+}
+
+<div id="wwa" class="container">
+    <div class="col-md-3 col-md-push-9" id="myScrollspy">
+        <div class="container-fluid">
+            <ul class="nav nav-tabs nav-stacked affix-top" data-spy="affix" data-offset-top="90">
+                <li class="active">
+                    <a href="#whowearedb">Who We Are</a>
+
+                </li>
+                <li>
+                    <a href="#ourhistory">Our History</a>
+
+                </li>
+                <li>
+                    <a href="#ourbeliefs">Our Beliefes</a>
+
+                </li>
+                <li>
+                    <a href="#ourmission">Our Mission</a>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="col-md-8 col-md-pull-3">
+        <div id="whowearedb" class="container-fluid">
+            <h1 class="well">Who We Are</h1>
+            <div>
+                @if (Model != null)
+                {
+                    @Html.Raw(Model.Whoweare)
+                }
+            </div>
+        </div>
+        <div id="ourhistory" class="container-fluid">
+            <h1 class="well">Our History</h1>
+            <div>
+                @if (Model != null)
+                {
+                    @Html.Raw(Model.OurHistory)
+                }
+            </div>
+        </div>
+        <div id="ourbeliefs" class="container-fluid">
+            <h1 class="well">Our Beliefs</h1>
+            <div>
+                @if (Model != null)
+                {
+                    @Html.Raw(Model.OurBeliefs)
+                }
+            </div>
+        </div>
+
+        <div id="ourmission" class="container-fluid">
+            <h1 class="well">Our Mission</h1>
+            <div>
+                @if (Model != null)
+                {
+                    @Html.Raw(Model.OurMission)
+                }
+            </div>
+        </div>
+    </div>
+</div>

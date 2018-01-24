@@ -1,0 +1,59 @@
+﻿@model NCCFOhaukwu.Web.Models.Projects
+
+@{
+    ViewBag.Title = "Add Project";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+<h2>Add Project</h2>
+
+<div class="col-md-8">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, new {@class = "control-label"})
+                <div class="">
+                    @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "input-lg", data_validation = "required", data_validation_error_msg = "The name field is required"}})
+                    @Html.ValidationMessageFor(model => model.Name, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="" style="">
+                    @Html.LabelFor(model => model.SubZone, new {@class = "control-label"})
+                    @Html.DropDownList("subzone", Model.PpaTownList, "Select Zone/Sub Zone", new {@class = "input-lg", data_validation = "required", data_validation_error_msg = "The subzone field is required", name = "subzone"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Milestone, new {@class = "control-label"})
+                <div class="">
+                    <div class="">
+                        @Html.TextAreaFor(model => model.Milestone, new { htmlAttributes = new { @class = "input-lg", data_validation = "required", data_validation_error_msg = "The milestone field is required" } })
+                        @Html.ValidationMessageFor(model => model.Milestone, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="">
+                    <input type="submit" value="Add Project" class="btn btn-mod"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-arrow-left"></i> Back to Projects</a>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

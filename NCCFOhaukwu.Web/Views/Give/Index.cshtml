@@ -1,0 +1,11 @@
+﻿@model DAL.Give
+@{
+    ViewBag.Title = "Give";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+<h2>Give</h2>
+@if (Model != null)
+{
+    @Html.Raw(Model.Donate)
+}

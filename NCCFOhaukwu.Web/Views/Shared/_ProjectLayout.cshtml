@@ -1,0 +1,25 @@
+﻿@using System.Text.RegularExpressions
+@{
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+<div class="container-fluid project-layout">
+    <div class="row">
+        <div class="col-md-2  col-md-push-10">
+            <div class="row">
+                <div class="container-fluid">
+                    <div class="list-group">
+                        <a href="@Url.Action("Project", "Project", new { name = Regex.Replace(ViewBag.ProjectName, "[^a-zA-Z0-9 ]", "").Replace(" ", "-").ToLower() })" class="list-group-item project-group">
+                            Milestone
+                        </a>
+                        <a href="@Url.Action("ProjectPictures", "Project", new { name = Regex.Replace(ViewBag.ProjectName, "[^a-zA-Z0-9 ]", "").Replace(" ", "-").ToLower() })" class="list-group-item project-group">Pictures</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9 col-md-pull-2 span-center-left project">
+            @RenderBody()
+        </div>
+    </div>
+</div>

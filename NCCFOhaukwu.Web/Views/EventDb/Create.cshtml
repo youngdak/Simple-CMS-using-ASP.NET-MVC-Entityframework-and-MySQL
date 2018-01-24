@@ -1,0 +1,92 @@
+﻿@model NCCFOhaukwu.Web.Models.Events
+
+@{
+    ViewBag.Title = "Add Event";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+<h2>Add Event</h2>
+
+<div class="col-md-8">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            <div class="form-group">
+                @Html.LabelFor(model => model.title, new { @class = "control-label" })
+                <div class="">
+                    @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "input-lg", data_validation = "required", data_validation_error_msg = "The first name field is required" } })
+                    @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.start, new { @class = "control-label" })
+                <div class="">
+                    @Html.EditorFor(model => model.start, new { htmlAttributes = new { @class = "input-lg", data_validation = "required", data_validation_error_msg = "The date field is required" } })
+                    @Html.ValidationMessageFor(model => model.start, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-5 zero-padding">
+                    <label class="control-label">Start time</label><br />
+                    <div class="col-md-6 zero-padding">
+                        @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "input-sm",  data_validation="time", data_validation_help="HH:mm", data_validation_error_msg = "The start time field must be in HH:mm form" } })
+                        @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6 zero-padding">
+                        @Html.DropDownListFor(m => m.StartTimeMeridian, Model.Meridian, new { @class = "input-sm", data_validation = "required", data_validation_error_msg = "The meridan field is required" })
+                        @Html.ValidationMessageFor(m => m.StartTimeMeridian, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 col-md-offset-1 zero-padding">
+                    <label class="control-label">End time</label><br />
+                    <div class="col-md-6 zero-padding">
+                        @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "input-sm", data_validation = "time", data_validation_help = "HH:mm", data_validation_error_msg = "The end time field must be in HH:mm form" } })
+                        @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6 zero-padding">
+                        @Html.DropDownListFor(m => m.EndTimeMeridian, Model.Meridian, new { @class = "input-sm", data_validation = "required", data_validation_error_msg = "The meridan field is required" })
+                        @Html.ValidationMessageFor(m => m.EndTimeMeridian, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Venue, new { @class = "control-label" })
+                <div class="">
+                    @Html.EditorFor(model => model.Venue, new { htmlAttributes = new { @class = "input-lg", data_validation = "required", data_validation_error_msg = "The first name field is required" } })
+                    @Html.ValidationMessageFor(model => model.Venue, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.VenueAddress, new { @class = "control-label" })
+                <div class="">
+                    @Html.EditorFor(model => model.VenueAddress, new { htmlAttributes = new { @class = "input-lg", data_validation = "required", data_validation_error_msg = "The first name field is required" } })
+                    @Html.ValidationMessageFor(model => model.VenueAddress, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, new { @class = "control-label" })
+                <div class="">
+                    @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "input-lg", data_validation = "required", data_validation_error_msg = "The first name field is required" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="">
+                    <input type="submit" value="Add Event" class="btn btn-mod" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-arrow-left"></i> Back to Events</a>
+            </div>
+        </div>
+    }
+    </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

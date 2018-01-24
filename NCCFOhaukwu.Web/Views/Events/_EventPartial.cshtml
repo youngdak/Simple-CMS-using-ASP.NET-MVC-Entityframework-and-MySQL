@@ -1,0 +1,43 @@
+﻿@using Microsoft.Ajax.Utilities
+@model IEnumerable<DAL.CorpMember>
+    
+@if (Model.Any())
+    {
+        <div class="birthday">
+            @foreach (var day in Model.DistinctBy(x => x.Day).OrderBy(x => x.Day))
+            {
+                <div class="container-fluid">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <span class="img-circle">@day.Day</span>
+                        </div>
+                        <div class="panel-body">
+                            @foreach (var bday in Model.Where(x => x.Day == Convert.ToInt32(day.Day)))
+                            {
+                                <div class="col-sm-3">
+                                    <a class="fancy-photo"
+                                       rel="group" title="@bday.Day, @bday.Month"
+                                       href="~/Images/MajorPic/@bday.Id">
+                                        <img src="~/Images/MiniPic/@bday.Id" class="img-responsive img-circle"/>
+                                    </a>
+                                    <h5>@bday.LastName, @bday.FirstName @bday.OtherName</h5>
+                                    <h5>@bday.PhoneNumber</h5>
+                                    <h5>Batch @bday.Batch.BatchName, @bday.ServiceYear.Year</h5>
+                                    <a href="@Url.Action("CorpMember", "WhoWeAre", new {id = @bday.Id})" class="btn btn-mod">More Details</a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="null-search-result">
+            <div class="col-sm-12 col-md-12 col-lg-12 well">
+                <span>No Birthdays</span>
+            </div>
+        </div>
+    }
+

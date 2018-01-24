@@ -1,0 +1,14 @@
+﻿@model DAL.Sermon
+@{
+    ViewBag.Title = @Model.Title;
+    Layout = "~/Views/Shared/_SermonLayout.cshtml";
+}
+
+<div class="general-news">
+    <span>@Model.Title</span>
+    <p>
+        <strong>Scriptures:</strong> @Model.Scriptures
+    </p>
+    <hr />
+    <span class="" style="">@Html.Raw(Model.Message)</span>
+</div>

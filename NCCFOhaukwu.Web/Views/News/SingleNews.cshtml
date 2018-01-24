@@ -1,0 +1,30 @@
+﻿@model DAL.News
+@{
+    ViewBag.Title = @Model.Title;
+    Layout = "~/Views/Shared/_NewsLayout.cshtml";
+}
+
+<div class="general-news">
+    <span>@Model.Title</span>
+    <div class="row">
+        <div class="col-xs-8 col-md-5">
+            <a href="@Url.Action("AuthorNews", "Author", new {username = Model.Username.Replace(" ", "-").ToLower()})"><i class="fa fa-user"></i>&nbsp;&nbsp;@Model.Author.FullName</a>
+        </div>
+        <div class="col-xs-4 col-md-7">
+            <a href="@Url.Action("News", "News")"><i class="fa fa-folder-open-o"></i>&nbsp;&nbsp;News</a>
+        </div>
+    </div><br/>
+    <p>
+        posted on <strong>@Model.DateCreated.ToString("D")</strong>
+    </p>
+    <hr/>
+    @if (Model.Photo != null)
+    {
+        <div class="row">
+            <div class="container-fluid">
+                <img src="~/Images/NewsPhoto/@Model.Id" class="img-responsive"/>
+            </div>
+        </div>
+    }
+    <span class="" style="">@Html.Raw(Model.TheNews)</span>
+</div>

@@ -1,0 +1,67 @@
+﻿@model DAL.ProjectPicture
+
+@{
+    ViewBag.Title = "Project Picture Details";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+<h2>Project Picture Details</h2>
+
+<div>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Project.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Project.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo)
+        </dt>
+
+        <dd>
+            <div class="">
+                @if (Model.Photo != null)
+                {
+                    <img src="~/Images/ProjectPhoto/@Model.Id" class="img-responsive" style="height: 100px; width: 100px;"/>
+                }
+                else
+                {
+                    <img src="~/img/no-passport.png" class="img-responsive img-thumbnail"/>
+                }
+            </div>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateModified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateModified)
+        </dd>
+
+    </dl>
+</div>
+<div class="form-group">
+    <a href="@Url.Action("Edit", "ProjectPicture", new {id = Model.Id})" class="btn btn-primary"><i class="fa fa-edit"></i> Edit Project Picture</a><br/><br/>
+    <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-arrow-left"></i> Back to Project Pictures</a>
+</div>

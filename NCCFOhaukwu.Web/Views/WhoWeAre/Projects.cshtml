@@ -1,0 +1,78 @@
+﻿@using System.Text.RegularExpressions
+@using PagedList.Mvc
+@model PagedList.IPagedList<DAL.Project>
+
+
+@{
+    ViewBag.Title = "Projects";
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+}
+
+
+<div class="row general whoweare">
+    <div class="col-md-3 col-md-push-9">
+        <div class="row static-search">
+            <div class="container-fluid">
+                <div>
+                    <label class="control-label">Filter:</label>
+                </div>
+                @using (Html.BeginForm("Projects", "WhoWeAre", FormMethod.Get))
+                {
+                    <div class="form-horizontal container-fluid">
+                        <div class="form-group">
+                            <div>
+                                <label class="control-label">Zone/Sub Zone</label>
+                                @Html.DropDownList("subzone", null, new {@class = "input-sm", name = "subzone", @onchange = "FillProject()"})
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <label class="control-label">Project Name</label>
+                                @Html.DropDownList("project", null, "All", new {@class = "input-sm", name = "project"})
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <input type="submit" value="Search" class="btn btn-mod-sm"/>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-9 col-md-pull-3 span-center-left">
+        <span class="container">Project</span>
+        @if (Model.Count > 0)
+        {
+            <div class="whoweare-project">
+                @foreach (var project in Model)
+                {
+                    <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
+                        <a href="@Url.Action("Project", "Project", new { name = Regex.Replace(project.Name, "[^a-zA-Z0-9 ]", "").Replace(" ", "-").ToLower() })">
+                            <i class="fa fa-folder fa-4x"></i>
+                        </a>
+                        <p>@project.Name</p>
+                    </div>
+                }
+            </div>
+            <div class="col-xs-12, col-sm-12, col-md-12" style="display: inline-block;">
+                @Html.PagedListPager(Model, page => Url.Action("Projects", "WhoWeAre", new {page, project = Request.QueryString["project"], subzone = Request.QueryString["subzone"]}),
+                    new PagedListRenderOptions {Display = PagedListDisplayMode.IfNeeded, MaximumPageNumbersToDisplay = 5})
+            </div>
+        }
+        else
+        {
+            <div class="null-search-result">
+                <div class="col-sm-12 col-md-12 col-lg-12 well">
+                    <span>No search results</span>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

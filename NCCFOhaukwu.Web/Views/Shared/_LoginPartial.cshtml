@@ -1,0 +1,89 @@
+﻿@using System.Security.Claims
+@using System.Threading
+@{
+    var principal = (ClaimsPrincipal) Thread.CurrentPrincipal;
+    var roles = principal.Claims.Where(x => x.Type == ClaimTypes.Role).Select(x => x.Value);
+
+    var isAdmin = roles.Any(role => role.ToLower().Contains("admin") || role.ToLower().Contains("effium") || role.ToLower().Contains("ngbo"));
+}
+
+@if (Request.IsAuthenticated && isAdmin)
+{
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            @User.Identity.Name <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+            <li>
+                <a href="@Url.Action("Index", "ServiceYear")">Service Year</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Batch")">Batch</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Portfolio")">Portfolio</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "CorpMember")">Corp Member</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Album")">Album</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "AlbumPhoto")">Album Photo</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "ProjectDb")">Project</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "ProjectPicture")">Project Picture</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "NewsDb")">News</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "EventDb")">Event</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "GiveDb")">Give</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "WhoWeAreDb")">Who We Are</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Carousel")">Carousel</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "NewHereDb")">New Here</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "ArticleDb")">Article</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "SermonDb")">Sermon</a>
+            </li>
+            <li>
+                <a href="@Url.Action("JesusCorpMembersToGenerals", "CorpMember")">Corpers to Generals</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "RolesAdmin")">Role</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "UsersAdmin")">User</a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "ResourceOperation")">Resource Operation</a>
+            </li>
+            <li>
+                <a href="@Url.Action("ChangePassword", "Account")">Change Password</a>
+            </li>
+            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new {id = "logoutForm"}))
+            {
+                @Html.AntiForgeryToken()
+                <li>
+                    <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                </li>
+            }
+        </ul>
+    </li>
+}

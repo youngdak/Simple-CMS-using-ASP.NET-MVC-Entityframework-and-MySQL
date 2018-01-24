@@ -1,0 +1,31 @@
+﻿@model DAL.ServiceYear
+
+@{
+    Layout = "~/Views/Shared/_LayoutInner.cshtml";
+    ViewBag.Title = "Delete Service Year";
+}
+
+<h3>Are you sure you want to delete this?</h3>
+<h4 class="alert-danger">Deleting this will also delete all batches, album pictures and corp members</h4>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Year)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete Service Year" class="btn btn-mod"/> <br/><br/>
+            <a href="@Url.Action("Index")" class="btn btn-default"><i class="fa fa-arrow-left"></i> Back to Service years</a>
+        </div>
+    }
+</div>

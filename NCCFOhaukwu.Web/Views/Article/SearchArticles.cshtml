@@ -1,0 +1,52 @@
+﻿@using System.Text.RegularExpressions
+@using PagedList.Mvc
+@model PagedList.IPagedList<DAL.Articles>
+
+@{
+    ViewBag.Title = "Search Results for: " + @ViewBag.search;
+    Layout = "~/Views/Shared/_SermonLayout.cshtml";
+}
+
+
+<span class="container-fluid">Search Results for: "@ViewBag.search"</span>
+@if (Model.Count > 0)
+{
+    foreach (var article in Model)
+    {
+        <div class="general-news">
+            <span>@article.Title</span>
+            <div class="row">
+                <div class="col-xs-8 col-md-5">
+                    <a href="@Url.Action("AuthorArticles", "Author", new { username = article.Username.Replace(" ", "-").ToLower() })"><i class="fa fa-user"></i>&nbsp;&nbsp;@article.Author.FullName</a>
+                </div>
+                <div class="col-xs-4 col-md-7">
+                    <a href="@Url.Action("Articles", "Article")"><i class="fa fa-folder-open-o"></i>&nbsp;&nbsp;Articles</a>
+                </div>
+            </div><br />
+            <br/>
+            <p>
+                posted on <strong>@article.DateModified.ToString("D")</strong>
+            </p>
+            <hr/>
+            @{
+                var articles = Regex.Replace(article.Article, "<.*?>", string.Empty);
+                articles = (articles.Length >= 300) ? articles.Substring(0, 300) : articles;
+            }
+            <span class="" style="">@articles ...</span>
+
+            <a class="btn btn-mod" href="@Url.Action("Article", "Article", new {id = article.Id, title = Regex.Replace(article.Title, "[^a-zA-Z0-9 ]", "").Replace(" ", "-").ToLower()})">Continue Reading</a>
+
+        </div>
+    }
+
+    @Html.PagedListPager(Model, page => Url.Action("SearchArticles", "Article", new {page, search = Request["search"]}),
+        new PagedListRenderOptions {Display = PagedListDisplayMode.IfNeeded, MaximumPageNumbersToDisplay = 10})
+}
+else
+{
+    <div class="null-search-result">
+        <div class="col-sm-12 col-md-12 col-lg-12 well">
+            <span>No search results</span>
+        </div>
+    </div>
+}
